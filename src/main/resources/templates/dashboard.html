@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "chart.js": "/node_modules/chart.js/auto/auto.js",
+                "@kurkle/color": "/node_modules/@kurkle/color/dist/color.esm.js",
+                "jquery": "https://code.jquery.com/jquery-3.7.1.js",
+                "vue": "https://unpkg.com/vue@3/dist/vue.global.js",
+                "jspdf": "https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js",
+                "jspdf-autotable": "/node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.mjs"
+
+            }
+        }
+    </script>
+    <script type="module">
+
+        import 'chart.js';
+        import '@kurkle/color';
+        import  'jquery';
+        window.jQuery = $;
+
+        import 'vue';
+        window.Vue = Vue;
+
+        import 'jspdf';
+
+        const { jsPDF } = window.jspdf;
+
+        import 'jspdf-autotable';
+
+
+
+
+
+
+    </script>
+
+    <title>Felix</title>
+
+    <link th:href="@{/css/dashboardCSS.css}" rel="stylesheet">
+    <link th:href="@{/css/ReactivoModalCSS.css}" rel="stylesheet">
+    <link th:href="@{/css/impresionCSS.css}" rel="stylesheet">
+    <link th:href="@{/css/vistaTablas.css}" rel="stylesheet">
+    <link th:href="@{/css/elementosGlobales.css}" rel="stylesheet">
+
+    <meta name="countProductos" th:content="${countProductos}">
+    <meta name="countReactivos" th:content="${countReactivos}">
+    <meta name="countProductosAuxiliares" th:content="${countProductosAuxiliares}">
+    <meta name="countMateriales" th:content="${countMateriales}">
+    <meta name="isAdmin" th:content="${isAdmin}">
+
+
+
+</head>
+<body>
+
+
+<div  id="app" class="app" >
+    <header class="app-header">
+        <div class="app-header-logo">
+            <div class="logo">
+				<span class="logo-icon">
+					<img src="https://assets.codepen.io/285131/almeria-logo.svg"  alt=""/>
+				</span>
+                <h1 class="logo-title">
+                    <span>Cosm</span>
+                    <span>Curie v1.0</span>
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <div>
+
+    <div class="app-body">
+        <div class="app-body-navigation" >
+            <nav class="navigation">
+
+                <a href="#" class="body-tab" :class="{ active: currentView === 'general' }" @click="changeView('general')">
+                    <span>General</span>
+                </a>
+                <a href="#" class="body-tab" :class="{ active: currentView === 'producto' }" @click="changeView('producto')">
+                    <span>Productos</span>
+                </a>
+                <a href="#" class="body-tab" :class="{ active: currentView === 'impresion' }" @click="changeView('impresion')">
+                    <span>Impresión</span>
+                </a>
+                <a href="#" class="body-tab" :class="{ active: currentView === 'miCuenta' }" @click="changeView('miCuenta')">
+                    <span>Mi Cuenta</span>
+                </a>
+                <a th:if="isAdmin" href="#" class="body-tab">
+                    <span>Control de Lugares</span>
+                </a>
+                <a th:if="isAdmin" href="#" class="body-tab">
+                    <span>Control de Cuentas</span>
+                </a>
+
+            </nav>
+            <footer class="footer">
+                <h1>Curie<small>©</small></h1>
+                <div>
+                    COSM ©<br />
+                    All Rights Reserved 2024
+                </div>
+            </footer>
+        </div>
+
+        <div class="app-body-main-content" id="content">
+            <transition name="slide-fade" mode="out-in">
+                <component :is="currentView" :isAdmin="isAdmin" v-if="currentView"></component>
+            </transition>
+        </div>
+    </div>
+
+    </div>
+
+
+</div>
+
+<div id="editModalReactivo" class="modal Reactivo">
+    <div class="modal-content Reactivo">
+
+        <span class="close Reactivo">&times;</span>
+
+        <h2>Reactivo</h2>
+        <form id="editFormReactivo" class="formModal">
+
+            <input type="hidden" id="editIdReactivo">
+
+
+            <div class="form-row">
+            <label class="labelModal" for="editNombreReactivo">Nombre:</label>
+            <input class="inputModal" type="text" id="editNombreReactivo">
+            <label class="labelModal" for="editCantidadReactivo">Cantidad:</label>
+            <input class="inputModal" type="number" id="editCantidadReactivo">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editStockMinimoReactivo">Stock Mínimo:</label>
+            <input class="inputModal" type="number" id="editStockMinimoReactivo">
+            <label class="labelModal" for="editFormatoReactivo">Formato:</label>
+            <input class="inputModal" type="text" id="editFormatoReactivo">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editGradoPurezaReactivo">Grado de Pureza:</label>
+            <input class="inputModal" type="text" id="editGradoPurezaReactivo">
+            <label class="labelModal" for="editFechaCaducidadReactivo">Fecha de Caducidad:</label>
+            <input class="inputModal" type="date" id="editFechaCaducidadReactivo">
+            </div>
+
+            <div class="form-row">
+            <label  class="labelModal" for="editLocalizacionReactivo">Localización:</label>
+            <select class="selectModal" id="editLocalizacionReactivo"></select>
+            <label class="labelModal" for="editUbicacionReactivo">Ubicación:</label>
+            <select class="selectModal" id="editUbicacionReactivo"></select>
+            </div>
+
+
+            <label class="labelModal" for="editRiesgos">Riesgos:</label>
+            <div id="editRiesgos"></div> <!-- Contenedor para los riesgos -->
+
+            <button type="submit">Guardar</button>
+
+        </form>
+    </div>
+</div>
+<div id="editModalAuxiliar" class="modal Auxiliar"  >
+    <div class="modal-content Auxiliar">
+        <span class="close Auxiliar">&times;</span>
+        <h2>Auxiliar</h2>
+        <form id="editFormAuxiliar" class="formModal">
+
+            <input type="hidden" id="editIdAuxiliar">
+
+
+            <div class="form-row">
+            <label class="labelModal" for="editNombreAuxiliar">Nombre:</label>
+            <input class="inputModal" type="text" id="editNombreAuxiliar">
+            <label class="labelModal" for="editCantidadAuxiliar">Cantidad:</label>
+            <input class="inputModal" type="number" id="editCantidadAuxiliar">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editStockMinimoAuxiliar">Stock Mínimo:</label>
+            <input class="inputModal" type="number" id="editStockMinimoAuxiliar">
+            <label class="labelModal" for="editFormatoAuxiliar">Formato:</label>
+            <input class="inputModal" type="text" id="editFormatoAuxiliar">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editLocalizacionAuxiliar">Localización:</label>
+            <select class="selectModal" id="editLocalizacionAuxiliar"></select>
+            <label class="labelModal" for="editUbicacionAuxiliar">Ubicación:</label>
+            <select class="selectModal" id="editUbicacionAuxiliar"></select>
+            </div>
+
+            <button type="submit">Guardar</button>
+
+        </form>
+    </div>
+</div>
+<div id="editModalMaterial" class="modal Material">
+    <div class="modal-content Material">
+
+        <span class="close Material">&times;</span>
+        <h2>Material</h2>
+
+        <form id="editFormMaterial" class="formModal">
+
+            <input type="hidden" id="editIdMaterial">
+
+            <div class="form-row">
+            <label class="labelModal" for="editNombreMaterial">Nombre:</label>
+            <input  class="inputModal" type="text" id="editNombreMaterial">
+
+            <label class="labelModal" for="editCantidadMaterial">Cantidad:</label>
+            <input  class="inputModal" type="number" id="editCantidadMaterial">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editStockMinimoMaterial">Stock Mínimo:</label>
+            <input  class="inputModal" type="number" id="editStockMinimoMaterial">
+            <label class="labelModal" for="editSubcategoriaMaterial">Subcategoria:</label>
+            <input  class="inputModal" type="text" id="editSubcategoriaMaterial">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editNumeroDeSerieMaterial">Numero de serie:</label>
+            <input  class="inputModal" type="text" id="editNumeroDeSerieMaterial">
+            <label class="labelModal" for="editDescripcionMaterial">Descripcion:</label>
+            <input  class="inputModal" type="text" id="editDescripcionMaterial">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editFechaCompraMaterial">Fecha de compra:</label>
+            <input  class="inputModal" type="date" id="editFechaCompraMaterial">
+            <label class="labelModal" for="editFechaCaducidadMaterial">Fecha de caducidad:</label>
+            <input  class="inputModal" type="date" id="editFechaCaducidadMaterial">
+            </div>
+
+            <div class="form-row">
+            <label class="labelModal" for="editLocalizacionMaterial">Localización:</label>
+            <select class="selectModal" id="editLocalizacionMaterial"></select>
+            <label class="labelModal" for="editUbicacionMaterial">Ubicación:</label>
+            <select class="selectModal" id="editUbicacionMaterial"></select>
+            </div>
+
+            <button type="submit">Guardar</button>
+
+        </form>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="module" th:src="@{/js/app.js}" ></script>
+
+</body>
+</html>

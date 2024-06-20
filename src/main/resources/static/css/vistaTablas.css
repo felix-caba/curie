@@ -1,0 +1,196 @@
+.service-sectionFather {
+
+    display: block;
+    max-width: 100%;
+
+
+    & > h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.service-sectionFather.active {
+
+    display: block;
+
+}
+
+.tabs {
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--c-text-tertiary);
+    border-bottom: 1px solid var(--c-gray-600);
+
+    a {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        text-decoration: none;
+        border-top: 2px solid transparent;
+        display: inline-flex;
+        transition: 0.25s ease;
+        &.active,
+        &:hover,
+        &:focus {
+            color: var(--c-text-primary);
+            border-color: var(--c-text-primary);
+        }
+    }
+}
+
+
+.service-section table {
+
+    font-size: 12px;
+    max-width: 100%;
+    width: max-content; /* Permite que la tabla tenga un ancho mínimo igual al contenido */
+    min-width: 100%; /* Asegura que la tabla tenga un ancho mínimo igual al contenedor */
+
+
+    th {
+
+        text-align: left;
+        padding: 0.75rem;
+        background-color: var(--c-gray-700);
+        color: var(--c-text-primary);
+    }
+
+    td {
+
+        padding: 0.75rem;
+
+    }
+
+    tr {
+        &:hover {
+            background-color: var(--c-gray-600);
+        }
+    }
+
+
+
+}
+
+.service-section {
+
+    display: none;
+    max-width: 100%;
+
+
+    & > h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.service-section.active {
+
+    display: block;
+
+}
+
+.table-container {
+    overflow-x: auto;
+    max-width: 100%; /* Asegura que el contenedor se ajuste al ancho del contenido */
+}
+
+.risk-container {
+    display: flex;
+    justify-content: center;
+}
+
+.risk-image img {
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.risk-image img:hover {
+    transform: scale(1.1);
+}
+
+.edit-button {
+    border-radius: 10px;
+    border: 0;
+    background-color: rgb(57, 0, 255);
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    box-shadow: rgb(41, 0, 166) 0px 10px 0px 0px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 10px 20px;
+}
+
+.edit-button:hover {
+    box-shadow: rgb(53, 0, 215) 0px 7px 0px 0px;
+}
+
+.edit-button:active {
+    background-color: rgb(57, 0, 253);
+    box-shadow: rgb(53, 0, 213) 0px 0px 0px 0px;
+    transform: translateY(5px);
+    transition: 200ms;
+}
+
+.delete-button {
+    border-radius: 10px;
+    border: 0;
+    background-color: rgb(255, 56, 86);
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 10px 20px;
+}
+
+.delete-button:hover {
+    box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
+}
+
+.delete-button:active {
+    background-color: rgb(255, 56, 86);
+    box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+    transform: translateY(5px);
+    transition: 200ms;
+}
+
+.botonesEditDeleteTabla {
+    display: flex;
+    justify-content: space-between;
+}
+
+.botonesAccionesTabla {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.butonAccionTabla {
+    background-color: #484d48;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 10px 20px;
+    transition: transform 0.3s ease;
+}
+
+.butonAccionTabla:hover {
+    transform: scale(1.10); /* Aplica un zoom del 10% al hacer hover */
+    background-color: #8b938b;
+}
+
+.butonAccionTabla[style*="pointer-events: none"] {
+    background-color: #252525; /* Cambia el color de fondo a gris */
+    color: #737373; /* Cambia el color del texto a gris claro */
+    cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+}

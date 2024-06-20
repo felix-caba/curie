@@ -1,0 +1,40 @@
+<section id="lugares-link" class="service-sectionFather">
+
+  <h1>Configuración Lugares</h1>
+
+  <div class="search-containerUbicaciones">
+    <input type="text" id="searchInputUbicaciones" placeholder="Buscar...">
+    <button id="searchButtonUbicaciones">Buscar</button>
+    <button id="cancelSearchButtonUbicaciones">Cancelar</button>
+  </div>
+
+  <div class="table-container">
+    <table border="1">
+      <thead>
+      <tr>
+        <th>ID Producto</th>
+
+        <th>Nombre Ubicacion</th>
+
+        <th>Nombre Localizacion</th>
+
+        <th th:if="${isAdmin}">Acciones</th>
+
+      </tr>
+      </thead>
+      <tbody id="ubicacionTableBody"></tbody>
+    </table>
+  </div>
+
+  <br>
+
+
+  <div class="botonesAccionesTabla">
+    <button class="butonAccionTabla" id="loadMoreButtonUbicacion">Adelante </button>
+    <button class="butonAccionTabla Crea" th:if="${isAdmin}" id="crearUbicacionButton">Crear Ubicacion</button>
+    <button class="butonAccionTabla" id="loadPreviousButtonUbicacion">Atrás</button>
+  </div>
+
+  <script th:src="@{/js/dashBoardUbicacionTabla.js}"></script>
+
+</section>

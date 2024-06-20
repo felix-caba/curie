@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link th:href="@{/css/loginCSS.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+
+
+</head>
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form th:action="@{/register}" method="post" id="registerForm">
+            <h1>Registrarse</h1>
+            <span>usa tu email para registrarte</span>
+            <input type="text" name="username" placeholder="Name" />
+            <input type="email" name="email" placeholder="Email" />
+            <input type="password" name="password" placeholder="Password" />
+            <button type="submit">Registro</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form th:action="@{/login}" method="post" id="loginForm">
+            <h1>Inicia sesion</h1>
+            <span>usa tu nombre de usuario</span>
+            <input type="text" name="username" placeholder="Usuario" />
+            <input type="password" name="password" placeholder="Password" />
+            <a href="">¿Has olvidado la contraseña?</a>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Bienvenido de vuelta!</h1>
+                <p>Para seguir usando la aplicación, inicia sesión</p>
+                <button class="ghost" id="signIn">Iniciar sesión</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hola, usuario!</h1>
+                <p>Introduce tus datos para registrarte</p>
+                <button class="ghost" id="signUp">Registro</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div id="errorMessageContainer" th:classappend="${errorMessage} ? 'show' : ''">
+
+    <p id="errorMessage" th:text="${errorMessage}"></p>
+
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/loginAJAX.js}"></script>
+<script th:src="@{/js/loginJS.js}"></script>
+</body>
+</html>

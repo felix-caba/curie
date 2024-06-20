@@ -1,0 +1,238 @@
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px); /* Inicialmente sin desenfoque */
+    transition: left 0.5s ease, background-color 0.5s ease 0.5s;
+}
+
+.modal.active {
+    display: block;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* Aplica un desenfoque de 10px */
+}
+
+#editRiesgos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.riesgo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los checkboxes */
+.riesgo-container input[type="checkbox"] {
+    margin-right: 10px; /* Agrega espacio entre el checkbox y la etiqueta */
+}
+
+/* Estilos para las imágenes */
+.riesgo-container img {
+    width: 75px; /* Establece el ancho de la imagen */
+    height: 75px; /* Establece la altura de la imagen */
+    margin-right: 10px; /* Agrega espacio entre la imagen y la etiqueta */
+}
+
+.modal-content {
+
+    background-color: #1F1F1FFF;
+
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ancho del modal */
+
+    box-shadow: 0px 0px 20px 30px rgba(255, 255, 255, 0.1);
+
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+
+    border-radius: 10px; /* Bordes redondeados */
+    position: relative; /* Necesario para la posición del botón de cierre */
+
+    transform: translate(-50%, -50%); /* Ajusta la posición para centrar completamente */
+
+}
+
+/* Botón de cierre (X) */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para el formulario dentro del modal */
+/* Asegura que todos los inputs, selects, y demás elementos tengan el mismo tamaño */
+.modal .formModal input,
+.modal .formModal select {
+    width: calc(50% - 10px); /* Calcula el ancho para 2 elementos por fila con un espacio de 10px entre ellos */
+    height: 30px; /* Altura uniforme para todos los inputs y selects */
+    box-sizing: border-box; /* Incluye el padding y el border en el tamaño total */
+    margin-bottom: 5px; /* Espacio entre filas */
+    margin-right: 50px;
+}
+
+#editRiesgos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.riesgo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los checkboxes */
+
+.riesgo-container input[type="checkbox"] {
+    height: 10px; /* Agrega espacio entre el checkbox y la etiqueta */
+}
+
+
+/* Establece el tamaño del contenedor de cada fila */
+.modal .formModal .form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Estilos para etiquetas */
+.modal .formModal label {
+    width: calc(50% - 10px); /* Las etiquetas ocupan el mismo espacio que los inputs/selects */
+    box-sizing: border-box;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+    .modal .formModal input,
+    .modal .formModal select,
+    .modal .formModal label {
+        width: 100%; /* En pantallas pequeñas, cada elemento ocupa toda la fila */
+    }
+
+    .form-row .formModal .modal{
+        flex-wrap: wrap;
+    }
+
+
+}
+
+
+.modal button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal button:hover {
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
+.search-containerReactivos,
+.search-containerAuxiliares,
+.search-containerMateriales,
+.search-containerUbicaciones{
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: space-between; /* Ajusta este valor para alinear los botones al final */
+    position: relative;
+}
+
+.search-containerReactivos input,
+.search-containerAuxiliares input,
+.search-containerMateriales input,
+.search-containerUbicaciones input
+{
+    margin-right: auto; /* Mueve el input al final */
+    background-color: #484d48;
+    color: white;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 1px gray;
+    font-size: 14px;
+    transition: flex 0.55s;
+    font-family: Consolas, monaco, monospace;
+    width: 70px;
+}
+
+.search-containerReactivos button,
+.search-containerAuxiliares button,
+.search-containerMateriales button,
+.search-containerUbicaciones button
+{
+
+    background-color: #484d48;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    margin: 15px;
+
+}
+
+.search-containerReactivos button:last-child,
+.search-containerAuxiliares button:last-child,
+.search-containerMateriales button:last-child,
+.search-containerUbicaciones button:last-child{
+    margin-left: 0; /* Elimina el margen izquierdo del último botón */
+}
+
+.search-containerReactivos input:focus,
+.search-containerAuxiliares input:focus,
+.search-containerMateriales input:focus,
+.search-containerUbicaciones input:focus{
+
+    flex: 1;
+    outline: 1px solid #ffffff;
+    box-shadow: none;
+
+}
+
+.search-containerReactivos button:hover,
+.search-containerAuxiliares button:hover,
+.search-containerMateriales button:hover,
+.search-containerUbicaciones button:hover{
+    transform: scale(1.10); /* Aplica un zoom del 10% al hacer hover */
+    color: #f1f1f1;
+    background-color: #727272;
+}
+
+
+
+

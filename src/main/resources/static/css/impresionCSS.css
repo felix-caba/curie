@@ -1,0 +1,36 @@
+.impresionesContenedor {
+    display: flex;
+    flex-direction: column;
+}
+
+.impresionTotal,
+.impresionPorCantidad,
+.impresionPorFechaDeCaducidad {
+    display: flex;
+    flex-direction: row; /* Cambiado a row para que los botones estén en fila */
+    justify-content: space-between; /* Para distribuir los botones uniformemente */
+    border-bottom: 1px solid #313131; /* Borde solo en la parte inferior */
+    padding: 10px; /* Espacio interno */
+    margin-bottom: 20px; /* Espacio entre los grupos de botones */
+    width: 100%; /* Ancho del contenedor */
+}
+
+
+#fechaCaducidadInput {
+
+    background-color: #484d48;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+
+}
+#cantidadInput {
+
+
+    background-color: #484d48;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+}
