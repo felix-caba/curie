@@ -18,11 +18,9 @@ public class Ubicacion {
     @Column(name = "nombre")
     private String nombre;
 
-
     @ManyToOne
     @JoinColumn(name = "idLocalizacionFK", nullable = false)
     @JsonBackReference
     private Localizacion localizacion;
-
 
 }

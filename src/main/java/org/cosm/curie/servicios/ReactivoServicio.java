@@ -132,6 +132,7 @@ public class ReactivoServicio {
     }
 
 
+
     public ReactivoDTO actualizarReactivo(Integer id, ReactivoDTO reactivoDTO) {
 
         Reactivos reactivoExistente = reactivoRepository.findById(id)

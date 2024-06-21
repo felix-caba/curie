@@ -56,8 +56,8 @@
     <meta name="countReactivos" th:content="${countReactivos}">
     <meta name="countProductosAuxiliares" th:content="${countProductosAuxiliares}">
     <meta name="countMateriales" th:content="${countMateriales}">
-    <meta name="isAdmin" th:content="${isAdmin}">
-
+    <meta name="isAdmin" th:content="${isAdmin} ? 'true' : 'false'">
+    <meta name="nombreUsuario" th:content="${nombreUsuario}">
 
 
 </head>
@@ -73,6 +73,7 @@
 				</span>
                 <h1 class="logo-title">
                     <span>Cosm</span>
+                    <span th:text="${nombreUsuario}"></span>
                     <span>Curie v1.0</span>
                 </h1>
             </div>

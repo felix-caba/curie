@@ -21,10 +21,8 @@ public class UsuarioServicio {
     public List<UsuarioDTO> obtenerTodosLosUsuarios(){
 
         List<Usuario> usuarios = usuarioRepositorio.findAll();
-
-
-
         return usuarios.stream().map(this::convertiraUsuarioDTO).collect(Collectors.toList());
+
     }
 
     private UsuarioDTO convertiraUsuarioDTO(Usuario usuario){
@@ -34,17 +32,16 @@ public class UsuarioServicio {
         dto.setEmail(usuario.getEmail());
         dto.setPassword(usuario.getPassword());
         dto.setAdmin(usuario.getAdmin());
-        dto.setPfp64(Base64.getEncoder().encodeToString(usuario.getPfp()));
+
+        if (usuario.getPfp() != null){
+            dto.setPfp64(Base64.getEncoder().encodeToString(usuario.getPfp()));
+        }
+
+
+
         return dto;
     }
 
-    public UsuarioDTO obtenerUsuarioPorId(Integer id){
-        Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
-        if(usuario == null){
-            return null;
-        }
-        return convertiraUsuarioDTO(usuario);
-    }
 
     public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO){
 
@@ -79,6 +76,18 @@ public class UsuarioServicio {
 
     public void eliminarUsuario(Integer id){
         usuarioRepositorio.deleteById(id);
+    }
+
+
+    public UsuarioDTO obtenerUsuarioPorNombre(String username) {
+
+        Usuario usuario = usuarioRepositorio.findByUsername(username).orElse(null);
+
+        if (usuario == null) {
+            return null;
+        }
+        return convertiraUsuarioDTO(usuario);
+
     }
 
 

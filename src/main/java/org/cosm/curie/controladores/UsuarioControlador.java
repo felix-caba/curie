@@ -2,11 +2,15 @@ package org.cosm.curie.controladores;
 
 import org.cosm.curie.DTO.ReactivoDTO;
 import org.cosm.curie.DTO.UsuarioDTO;
+import org.cosm.curie.entidades.Usuario;
 import org.cosm.curie.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +22,6 @@ public class UsuarioControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-
 
     @GetMapping("/all")
     public List<UsuarioDTO> obtenerTodosLosUsuarios() {
@@ -42,7 +45,19 @@ public class UsuarioControlador {
         return usuarioServicio.actualizarUsuario(id, usuarioDTO);
     }
 
+    @GetMapping("/current")
+    public UsuarioDTO getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
 
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String currentUserName = userDetails.getUsername();
+
+            return usuarioServicio.obtenerUsuarioPorNombre(currentUserName);
+        }
+
+        return null;
+    }
 
 
 
