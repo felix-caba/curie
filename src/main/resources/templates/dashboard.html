@@ -1,10 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+>
 <head>
+
+    <script>
+        const theme = localStorage.getItem('theme') || 'lightMode'; // Establece el tema por defecto
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link id="tabulator-stylesheet" href="/node_modules/tabulator-tables/dist/css/tabulator_site_dark.css" rel="stylesheet">
+
+    <link th:href="@{/css/dashboardCSS.css}" rel="stylesheet" type="text/css">
+
+    <link id="themeStylesheet" th:href="@{/css/mainLight.css}" rel="stylesheet" type="text/css">
+
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
@@ -16,26 +31,31 @@
                 "jquery": "https://code.jquery.com/jquery-3.7.1.js",
                 "vue": "https://unpkg.com/vue@3/dist/vue.global.js",
                 "jspdf": "https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js",
-                "jspdf-autotable": "/node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.mjs"
+                "jspdf-autotable": "/node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.mjs",
+                "tabulator-tables": "/node_modules/tabulator-tables/dist/js/tabulator_esm.min.js"
 
             }
         }
     </script>
     <script type="module">
 
+
         import 'chart.js';
         import '@kurkle/color';
         import  'jquery';
         window.jQuery = $;
-
         import 'vue';
         window.Vue = Vue;
-
         import 'jspdf';
-
         const { jsPDF } = window.jspdf;
-
         import 'jspdf-autotable';
+
+        import 'tabulator-tables';
+
+
+
+
+
 
 
 
@@ -64,7 +84,10 @@
 <body>
 
 
-<div  id="app" class="app" >
+
+
+
+<div id="app" class="app" >
     <header class="app-header">
         <div class="app-header-logo">
             <div class="logo">
@@ -76,8 +99,21 @@
                     <span th:text="${nombreUsuario}"></span>
                     <span>Curie v1.0</span>
                 </h1>
+
+
             </div>
         </div>
+
+
+        <button @click="logout()" id="logoutButton">Logout</button>
+
+
+
+        <label>
+            <input type="checkbox" @click="toggleTheme" :checked="theme === 'darkMode'">
+        </label>
+
+
     </header>
 
     <div>
@@ -89,19 +125,21 @@
                 <a href="#" class="body-tab" :class="{ active: currentView === 'general' }" @click="changeView('general')">
                     <span>General</span>
                 </a>
+
                 <a href="#" class="body-tab" :class="{ active: currentView === 'producto' }" @click="changeView('producto')">
                     <span>Productos</span>
                 </a>
+
                 <a href="#" class="body-tab" :class="{ active: currentView === 'impresion' }" @click="changeView('impresion')">
                     <span>Impresión</span>
                 </a>
                 <a href="#" class="body-tab" :class="{ active: currentView === 'miCuenta' }" @click="changeView('miCuenta')">
                     <span>Mi Cuenta</span>
                 </a>
-                <a th:if="isAdmin" href="#" class="body-tab">
+                <a th:if="isAdmin" href="#" class="body-tab" >
                     <span>Control de Lugares</span>
                 </a>
-                <a th:if="isAdmin" href="#" class="body-tab">
+                <a th:if="isAdmin" href="#" class="body-tab" :class="{ active: currentView === 'controlCuentas' }" @click="changeView('controlCuentas')">
                     <span>Control de Cuentas</span>
                 </a>
 
@@ -111,6 +149,7 @@
                 <div>
                     COSM ©<br />
                     All Rights Reserved 2024
+
                 </div>
             </footer>
         </div>

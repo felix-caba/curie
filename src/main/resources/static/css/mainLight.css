@@ -1,0 +1,74 @@
+:root {
+    --c-gray-900: #ffffff;
+    --c-gray-800: #f1f1f1;
+    --c-gray-700: #bdbbb7;
+    --c-gray-600: #a6a6a6;
+    --c-gray-500: #969593;
+    --c-gray-400: #313131;
+    --c-gray-300: #2e2e2e;
+    --c-gray-200: #1f1f1f;
+    --c-gray-100: #000000;
+    --c-green-500: #45ffbc;
+    --c-olive-500: #e3ffa8;
+    --c-white: var(--c-gray-900);
+    --c-text-primary: var(--c-gray-100);
+    --c-text-secondary: var(--c-gray-300);
+    --c-text-tertiary: var(--c-gray-500);
+}
+
+body {
+    background-color: var(--c-gray-900);
+    color: var(--c-text-primary);
+}
+
+.app {
+    background-color: var(--c-gray-800);
+}
+
+.app-header {
+    border-bottom: 1px solid var(--c-gray-600);
+}
+
+.logo {
+    border-bottom: 1px solid var(--c-gray-600);
+}
+
+.logo-title {
+    span:first-child {
+        color: var(--c-text-primary);
+    }
+    span:last-child {
+        color: var(--c-text-tertiary);
+    }
+}
+
+.navigation {
+    color: var(--c-text-tertiary);
+    a {
+        &:hover,
+        &:focus {
+            color: var(--c-text-primary);
+        }
+        &.active {
+            color: var(--c-text-primary);
+        }
+    }
+}
+
+[data-theme="darkMode"] {
+    --c-gray-900: #000000;
+    --c-gray-800: #1f1f1f;
+    --c-gray-700: #2e2e2e;
+    --c-gray-600: #313131;
+    --c-gray-500: #969593;
+    --c-gray-400: #a6a6a6;
+    --c-gray-300: #bdbbb7;
+    --c-gray-200: #f1f1f1;
+    --c-gray-100: #ffffff;
+    --c-green-500: #45ffbc;
+    --c-olive-500: #e3ffa8;
+    --c-white: var(--c-gray-100);
+    --c-text-primary: var(--c-gray-100);
+    --c-text-secondary: var(--c-gray-200);
+    --c-text-tertiary: var(--c-gray-500);
+}

@@ -165,10 +165,11 @@ loadData(offset);
             openEditModalReactivo(id);
         }
     });
-
+if (isAdmin) {
     document.getElementById('crearReactivoButton').addEventListener('click', () => {
         openCreateModalReactivo();
     });
+}
 
     function openEditModalReactivo(id) {
         fetch(`/api/reactivos/${id}`)

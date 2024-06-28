@@ -149,9 +149,12 @@ spanMaterial.onclick = function() {
 
         });
 
-        document.getElementById('crearMaterialButton').addEventListener('click', () => {
-            openCreateModalMaterial();
-        });
+if (isAdmin) {
+    document.getElementById('crearMaterialButton').addEventListener('click', () => {
+        openCreateModalMaterial();
+    });
+
+}
 
 
 

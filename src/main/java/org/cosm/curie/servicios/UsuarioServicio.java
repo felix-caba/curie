@@ -1,8 +1,10 @@
 package org.cosm.curie.servicios;
 
+import jakarta.transaction.Transactional;
 import org.cosm.curie.DTO.UsuarioDTO;
-import org.cosm.curie.entidades.Reactivos;
+import org.cosm.curie.entidades.PasswordResetToken;
 import org.cosm.curie.entidades.Usuario;
+import org.cosm.curie.repositorios.PasswordResetTokenRepository;
 import org.cosm.curie.repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,13 +12,20 @@ import org.springframework.stereotype.Service;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 @Service
 public class UsuarioServicio {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
+
+    @Autowired
+    private PasswordResetTokenRepository tokenRepository;
+
+
 
     public List<UsuarioDTO> obtenerTodosLosUsuarios(){
 
@@ -58,20 +67,25 @@ public class UsuarioServicio {
 
     }
 
-    public UsuarioDTO actualizarUsuario(Integer id, UsuarioDTO usuarioDTO){
-
+    public UsuarioDTO actualizarUsuario(Integer id, UsuarioDTO usuarioDTO) {
         Usuario usuarioExistente = usuarioRepositorio.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el reactivo con ID: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró el usuario con ID: " + id));
 
         usuarioExistente.setUsername(usuarioDTO.getUsername());
         usuarioExistente.setEmail(usuarioDTO.getEmail());
-        usuarioExistente.setPassword(usuarioDTO.getPassword());
-        usuarioExistente.setAdmin(usuarioDTO.getAdmin());
-        usuarioExistente.setPfp(Base64.getDecoder().decode(usuarioDTO.getPfp64()));
+
+        if (usuarioDTO.getPassword() != null) {
+            usuarioExistente.setPassword(usuarioDTO.getPassword());
+        }
+        if (usuarioDTO.getAdmin() != null) {
+            usuarioExistente.setAdmin(usuarioDTO.getAdmin());
+        }
+        if (usuarioDTO.getPfp64() != null) {
+            usuarioExistente.setPfp(Base64.getDecoder().decode(usuarioDTO.getPfp64()));
+        }
 
         usuarioRepositorio.save(usuarioExistente);
         return convertiraUsuarioDTO(usuarioExistente);
-
     }
 
     public void eliminarUsuario(Integer id){
@@ -89,6 +103,47 @@ public class UsuarioServicio {
         return convertiraUsuarioDTO(usuario);
 
     }
+
+
+    public Usuario obtenerPorID(Integer id) {
+        Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
+        if (usuario == null) {
+            return null;
+        }
+        return (usuario);
+    }
+
+     @Transactional
+    public void createPasswordResetTokenForUser(Usuario usuario, String token) {
+
+         PasswordResetToken myToken = new PasswordResetToken(token, usuario);
+         tokenRepository.save(myToken);
+
+    }
+
+
+
+
+
+    public PasswordResetToken getPasswordResetToken(String token) {
+        return tokenRepository.findByToken(token);
+    }
+
+
+    public void actualizarPassword(Usuario usuario, String password) {
+
+        usuario.setPassword(passwordEncoder.encode(password));
+
+        usuarioRepositorio.save(usuario);
+
+
+    }
+
+
+
+
+
+
 
 
 

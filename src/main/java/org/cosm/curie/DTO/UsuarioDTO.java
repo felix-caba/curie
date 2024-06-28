@@ -14,4 +14,6 @@ public class UsuarioDTO {
     private Integer admin;
     private String pfp64;
 
+
+
 }

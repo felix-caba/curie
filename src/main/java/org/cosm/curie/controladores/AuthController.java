@@ -30,15 +30,14 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
 
-
-
         model.addAttribute("user", new Usuario());
+
+
 
         return "login";
     }

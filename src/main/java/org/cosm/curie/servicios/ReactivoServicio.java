@@ -198,17 +198,13 @@ public class ReactivoServicio {
 
 
     public List<ReactivoDTO> obtenerReactivosPorCantidadMenor(Integer cantidad) {
-
         List<Reactivos> reactivos = reactivoRepository.findReactivosByCantidadLessThan(cantidad);
         return reactivos.stream().map(this::convertirAReactivoDTO).collect(Collectors.toList());
-
     }
 
     public List<ReactivoDTO> obtenerReactivosPorFechaCaducidadMenor(Date fecha) {
-
         List<Reactivos> reactivos = reactivoRepository.findReactivosByFechaCaducidadLessThan(fecha);
         return reactivos.stream().map(this::convertirAReactivoDTO).collect(Collectors.toList());
-
     }
 
 

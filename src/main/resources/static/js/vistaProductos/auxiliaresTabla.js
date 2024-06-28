@@ -6,6 +6,10 @@ let offsetA = 0;
 const limitA = 15;
 const isAdmin = document.querySelector('meta[name="isAdmin"]').getAttribute('content') === 'true';
 
+
+
+
+
 let isSearchingAuxiliares = false;
 
 function loadDataAuxiliares(offsetA) {
@@ -138,9 +142,14 @@ document.getElementById('auxiliarTableBody').addEventListener('click', (event) =
             }
         });
 
-document.getElementById('crearAuxiliarButton').addEventListener('click', () => {
-            openCreateModalAuxiliar();
-        });
+
+if (isAdmin) {
+    document.getElementById('crearAuxiliarButton').addEventListener('click', () => {
+        openCreateModalAuxiliar();
+    });
+}
+
+
 
 function openEditModalAuxiliar(id) {
         fetch(`/api/auxiliares/${id}`)
