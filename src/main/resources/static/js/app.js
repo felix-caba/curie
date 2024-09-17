@@ -5,7 +5,6 @@ import miCuentaComponent from "./components/miCuentaComponent.js";
 import controlCuentasComponent from "./components/controlCuentasComponent.js";
 
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const app = Vue.createApp({
         data() {

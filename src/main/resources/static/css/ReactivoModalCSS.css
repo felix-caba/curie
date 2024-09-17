@@ -44,7 +44,7 @@
 
 .modal-content {
 
-    background-color: #1F1F1FFF;
+    background-color: var(--c-gray-800);
 
     padding: 20px;
     border: 1px solid #888;

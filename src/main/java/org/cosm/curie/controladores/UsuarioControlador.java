@@ -107,21 +107,6 @@ public class UsuarioControlador {
     }
 
 
-    @PostMapping("/reset-password/{id}")
-    public ResponseEntity<Void> resetPassword(@PathVariable Integer id) {
-        Usuario usuario = usuarioServicio.obtenerPorID(id);
-        if (usuario == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        String token = UUID.randomUUID().toString();
-        usuarioServicio.createPasswordResetTokenForUser(usuario, token);
-
-        String resetUrl = "http://localhost:8080/reset-password?token=" + token;
-        sendPasswordResetEmail(usuario.getEmail(), resetUrl);
-
-        return ResponseEntity.ok().build();
-    }
 
 
     private void sendPasswordResetEmail(String email, String resetUrl) {

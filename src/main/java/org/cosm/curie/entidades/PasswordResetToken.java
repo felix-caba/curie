@@ -3,56 +3,36 @@ package org.cosm.curie.entidades;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
-
 @Getter
+@Setter
+
 @Entity
-@Table(name = "password_reset_token")
 public class PasswordResetToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false, unique = true)
     private String token;
 
-    @OneToOne(targetEntity = Usuario.class, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
     private Usuario usuario;
 
-    private Date expiryDate;
+    @Column(nullable = false)
+    private LocalDateTime expiryDate;
 
-    public PasswordResetToken() {
-    }
+    // Getters y setters
 
-    public PasswordResetToken(String token, Usuario usuario) {
-        this.token = token;
-        this.usuario = usuario;
-        this.expiryDate = calculateExpiryDate(24 * 60); // 24 hours
-    }
-
-    private Date calculateExpiryDate(int expiryTimeInMinutes) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Date(cal.getTime().getTime());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PasswordResetToken that)) return false;
-        return Objects.equals(getId(), that.getId());
-    }
-
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+    public boolean isExpired() {
+        return expiryDate.isBefore(LocalDateTime.now());
     }
 
 

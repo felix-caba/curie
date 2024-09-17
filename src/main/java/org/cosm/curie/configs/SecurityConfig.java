@@ -50,7 +50,10 @@ public class SecurityConfig   {
                                 .requestMatchers("/css/**", "/js/**", "/register", "/login").permitAll()
                                 .requestMatchers("/webjars/**").permitAll()
                                 .requestMatchers("/node_modules/**").permitAll()
-                                .requestMatchers("/register", "/login, /productos").permitAll()
+
+                                .requestMatchers("/register", "/login", "/productos").permitAll()
+
+                                .requestMatchers("/forgot-password", "/reset-password").permitAll()
 
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
 

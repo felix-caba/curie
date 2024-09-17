@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -23,8 +25,8 @@ public class Usuario {
     @Column(length=16777216)
     private byte[] pfp;
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private PasswordResetToken passwordResetToken;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<PasswordResetToken> passwordResetTokens;
 
 
 }

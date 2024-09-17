@@ -113,21 +113,7 @@ public class UsuarioServicio {
         return (usuario);
     }
 
-     @Transactional
-    public void createPasswordResetTokenForUser(Usuario usuario, String token) {
 
-         PasswordResetToken myToken = new PasswordResetToken(token, usuario);
-         tokenRepository.save(myToken);
-
-    }
-
-
-
-
-
-    public PasswordResetToken getPasswordResetToken(String token) {
-        return tokenRepository.findByToken(token);
-    }
 
 
     public void actualizarPassword(Usuario usuario, String password) {

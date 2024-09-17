@@ -19,8 +19,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.30'
 
 
-
-
+    implementation 'com.sendgrid:sendgrid-java:4.7.6'
 
 
     runtimeOnly("org.webjars.npm:jspdf:2.5.1")
