@@ -56,9 +56,11 @@
 <br>
 
 <div id="errorMessageContainer" th:classappend="${errorMessage} ? 'show' : ''">
-
     <p id="errorMessage" th:text="${errorMessage}"></p>
+</div>
 
+<div id="sucessMessageContainer" th:classappend="${sucessMessage} ? 'show' : ''">
+    <p id="sucessMessage" th:text="${sucessMessage}"></p>
 </div>
 
 <script th:src="@{/js/jquery.min.js}"></script>

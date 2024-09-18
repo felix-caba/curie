@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
@@ -26,43 +27,47 @@ public class PasswordResetController {
     }
 
     @PostMapping("/forgot-password")
-    public String forgotPassword(@RequestParam("email") String email, Model model) {
+    public String forgotPassword(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
         Usuario user = userRepository.findByEmail(email);
         if (user == null) {
-            model.addAttribute("error", "Email not found");
-            return "forgot-password";
+            redirectAttributes.addFlashAttribute("error", "Email not found");
+            return "redirect:/forgot-password";
+        } else {
+            String token = UUID.randomUUID().toString();
+            passwordResetService.createPasswordResetTokenForUser(user, token);
+            passwordResetService.sendPasswordResetEmail(email, token);
+            redirectAttributes.addFlashAttribute("sucessMessage", "Password reset email sent");
+            return "redirect:/login";
+
         }
-
-        String token = UUID.randomUUID().toString();
-        passwordResetService.createPasswordResetTokenForUser(user, token);
-        passwordResetService.sendPasswordResetEmail(email, token);
-
-        model.addAttribute("message", "Password reset email sent");
-        // changes the url to again login
-        return "redirect:/login";
-
 
     }
 
+
     @GetMapping("/reset-password")
-    public String showResetPasswordForm(@RequestParam("token") String token, Model model) {
+    public String showResetPasswordForm(@RequestParam("token") String token, Model model, RedirectAttributes redirectAttributes) {
+
         String result = passwordResetService.validatePasswordResetToken(token);
+
         if (!"valid".equals(result)) {
-            model.addAttribute("error", "Ha expirado su Token...");
-            return "error";
+
+            redirectAttributes.addFlashAttribute("errorMessage", "Ha expirado su Token...");
+            return "redirect:/login";
         }
-        model.addAttribute("token", token);
+
+        redirectAttributes.addFlashAttribute("token", token);
         return "reset-password";
+
     }
 
 
     @PostMapping("/reset-password")
     public String resetPassword(@RequestParam("token") String token,
                                 @RequestParam("password") String password,
-                                Model model) {
+                                RedirectAttributes redirectAttributes) {
         String result = passwordResetService.validatePasswordResetToken(token);
         if (!"valid".equals(result)) {
-            model.addAttribute("error", "Invalid or expired token");
+            redirectAttributes.addFlashAttribute("errorMessage", "Ha expirado su Token...");
             return "error";
         }
 
@@ -70,7 +75,7 @@ public class PasswordResetController {
         passwordResetService.changeUserPassword(user, password);
         passwordResetService.deletePasswordResetToken(token);
 
-        model.addAttribute("message", "Password has been reset successfully");
+        redirectAttributes.addFlashAttribute("successMessage", "Contraseña restablecida con éxito");
         return "redirect:/login";
 
     }
