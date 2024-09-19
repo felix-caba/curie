@@ -33,15 +33,35 @@ a {
     flex-direction: column;
 
 }
-.app-header {
 
-    column-gap: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-
+#username{
+    font-size: 22px;
 }
+
+
+.app-header {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+
+.headerFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+
+
 .app-body {
 
     overflow: hidden;
@@ -59,7 +79,6 @@ a {
     }
 }
 .app-body-navigation {
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
     @media (max-width: 1200px) {
@@ -67,7 +86,7 @@ a {
     }
 }
 .footer {
-    margin-top: auto;
+    margin-top: 100%;
     h1 {
         font-size: 1.5rem;
         line-height: 1.125;
@@ -107,7 +126,6 @@ a {
     display: flex;
     flex-direction: column;
     line-height: 1.25;
-    margin-left: 0.75rem;
 }
 .navigation {
     display: flex;
@@ -154,6 +172,10 @@ a {
 
 .slide-fade-leave-active {
     transition: opacity 0.5s ease;
+}
+
+.app-header-logo{
+    margin-bottom: 0;
 }
 
 .slide-fade-leave-to, .slide-fade-enter-from

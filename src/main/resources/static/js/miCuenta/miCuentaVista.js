@@ -1,5 +1,5 @@
 
-
+import {showNotification} from "../notificationGenerator.js";
 
 function fillUserData() {
 
@@ -41,13 +41,23 @@ function fillUserData() {
         const email = emailInput.value;
         let pfp64 = null;
 
-        if (pfpUpload.files.length > 0) {
+        if (pfpUpload.files.length > 0 && pfpUpload.files.length < 5000) {
             try {
+
+                // check if the file is an image
+
+                if (!pfpUpload.files[0].type.startsWith('image/')) {
+                    showNotification('El archivo seleccionado no es una imagen', "error");
+                    return;
+                }
+
                 pfp64 = await toBase64(pfpUpload.files[0]);
+
+
             } catch (error) {
-                console.error('Error al convertir la imagen:', error);
-                alert('Error al convertir la imagen');
+                showNotification('Error al convertir la imagen a base64', "error");
                 return;
+
             }
         }
 

@@ -109,14 +109,6 @@ public class UsuarioControlador {
 
 
 
-    private void sendPasswordResetEmail(String email, String resetUrl) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("Restablecer Contraseña");
-        message.setText("Para restablecer su contraseña, haga clic en el siguiente enlace: " + resetUrl);
-        mailSender.send(message);
-    }
-
 
 
 

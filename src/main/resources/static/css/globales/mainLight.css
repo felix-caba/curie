@@ -16,6 +16,12 @@
     --c-text-tertiary: var(--c-gray-500);
 }
 
+
+#logo {
+    color: var(#000000);
+    fill: currentColor; /* Aplica el color actual */
+}
+
 body {
     background-color: var(--c-gray-900);
     color: var(--c-text-primary);

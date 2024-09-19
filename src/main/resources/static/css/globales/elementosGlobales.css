@@ -16,6 +16,12 @@
     z-index: 1;
 }
 
+#logo {
+    width: 100%; /* Ajusta el SVG al tamaño del contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+
+
 .impresionesContenedor button::before, .impresionesContenedor button::after {
     content: '';
     display: block;
@@ -51,3 +57,38 @@
 .impresionesContenedor button:active {
     filter: brightness(.8);
 }
+
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.notification {
+    background-color: #f44336;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notification.show {
+    opacity: 1; /* Se hace visible */
+    transform: translateY(0); /* Se mueve a su posición original */
+}
+
+.notification.success {
+    background-color: #4CAF50;
+}
+
+.notification.error {
+    background-color: #f44336;
+}
+
+
+

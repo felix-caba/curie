@@ -80,6 +80,7 @@ public class UsuarioServicio {
         if (usuarioDTO.getAdmin() != null) {
             usuarioExistente.setAdmin(usuarioDTO.getAdmin());
         }
+
         if (usuarioDTO.getPfp64() != null) {
             usuarioExistente.setPfp(Base64.getDecoder().decode(usuarioDTO.getPfp64()));
         }
