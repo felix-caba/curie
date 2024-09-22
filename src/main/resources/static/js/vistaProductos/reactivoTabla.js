@@ -43,10 +43,15 @@ function loadData(offset) {
                        row.innerHTML += `
 
                   <td>
-                    <div class="botonesEditDeleteTabla">
-                         <button class="edit-button" id="editButtonReactivo" data-id="${item.idProducto}">Editar</button>
-                         <button class="delete-button" id="deleteButtonReactivo" data-id="${item.idProducto}">Borrar</button>
-                    </div>
+                
+                    
+            
+                         <div class="botonesEditDeleteTabla">
+                                <img class="botonAccionTabla" id="editButtonReactivo" src="/svg/edit.svg" alt="Editar" data-id="${item.idProducto}">
+                                <img class="botonAccionTabla" id="deleteButtonReactivo" src="/svg/delete.svg" alt="Borrar" data-id="${item.idProducto}">
+                            </div>
+                         
+                  
                   </td>`;
 
                 }
@@ -89,6 +94,8 @@ function loadPreviousData() {
 }
 
 document.getElementById('loadPreviousButtonReact').addEventListener('click', loadPreviousData);
+
+
 document.getElementById('loadMoreButtonReact').addEventListener('click', () => {
     offset += limit;
     loadData(offset);
@@ -117,7 +124,7 @@ function generateRiskCellContent(riesgos) {
     return content;
 }
 
-document.getElementById('loadMoreButtonReact').addEventListener('click', loadData);
+// XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 
 document.addEventListener('DOMContentLoaded', loadData);
 

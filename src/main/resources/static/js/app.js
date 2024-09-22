@@ -4,10 +4,17 @@ import impresionComponent from "./components/impresionComponent.js";
 import miCuentaComponent from "./components/miCuentaComponent.js";
 import controlCuentasComponent from "./components/controlCuentasComponent.js";
 
+const { createApp } = Vue
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
-    const app = Vue.createApp({
+
+
+
+    createApp({
         data() {
+
 
             let theme = localStorage.getItem('theme') === 'true'
 
@@ -32,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'controlCuentas': controlCuentasComponent,
         },
         methods: {
+
             changeView(view) {
                 this.currentView = view;
                 history.pushState({}, view, `/${view}`);
@@ -80,6 +88,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
 
-    });
-    app.mount('#app');
+    }).mount('#app');
+
+
 });
+
+
+
+/*
+
+ */

@@ -41,13 +41,13 @@ export default {
             <table border="1">
                 <thead>
                 <tr>
-                    <th>ID Producto</th>
+                    <th v-if="isAdmin">ID</th>
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Stock Mínimo</th>
                     <th>Formato</th>
-                    <th>Grado de Pureza</th>
-                    <th>Fecha de Caducidad</th>
+                    <th>Grado Pureza</th>
+                    <th>Fecha Caducidad</th>
                     <th>Localización</th>
                     <th>Ubicación</th>
                     <th>Riesgos</th>
@@ -78,7 +78,7 @@ export default {
             <table border="1">
                 <thead>
                 <tr>
-                    <th>ID Producto</th>
+                    <th v-if="isAdmin">ID</th>
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Stock Mínimo</th>
@@ -112,7 +112,8 @@ export default {
             <table border="1">
                 <thead>
                 <tr>
-                    <th>ID Producto</th>
+
+                    <th v-if="isAdmin">ID</th>
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Stock Mínimo</th>
@@ -149,14 +150,16 @@ export default {
     
     `,
 
+
+
     mounted() {
 
-        loadTabla();
-        iniciarMaterialesTabla();
-        iniciarAuxiliaresTabla();
-        iniciarReactivosTabla();
-
-
+        this.$nextTick(() => {
+            loadTabla();
+            iniciarMaterialesTabla();
+            iniciarAuxiliaresTabla();
+            iniciarReactivosTabla();
+        });
 
 
     }

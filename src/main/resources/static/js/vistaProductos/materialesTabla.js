@@ -47,10 +47,10 @@ function loadDataMateriales(offsetM) {
                           row.innerHTML += `
 
                     <td>
-                      <div class="botonesEditDeleteTabla">
-                         <button class="edit-button" id="editButtonMaterial" data-id="${item.idProducto}">Editar</button>
-                         <button class="delete-button" id="deleteButtonMaterial" data-id="${item.idProducto}">Borrar</button>
-                      </div>
+                        <div class="botonesEditDeleteTabla">
+                                <img class="botonAccionTabla" id="editButtonMaterial" src="/svg/edit.svg" alt="Editar" data-id="${item.idProducto}">
+                                <img class="botonAccionTabla" id="deleteButtonMaterial" src="/svg/delete.svg" alt="Borrar" data-id="${item.idProducto}">
+                            </div>
                     </td>`;
 
                       }
@@ -100,7 +100,6 @@ document.getElementById('loadMoreButtonMat').addEventListener('click', () => {
 });
 
 
-document.getElementById('loadMoreButtonMat').addEventListener('click', loadDataMateriales);
 
 document.addEventListener('DOMContentLoaded', loadDataMateriales);
 

@@ -41,31 +41,52 @@
 }
 
 
+.table-container{
+
+        overflow: auto;
+        width: 100%;
+
+
+}
+
+
+
+
+
 .service-section table {
 
+    border: 1px solid var(--c-gray-800);
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: left;
     font-size: 12px;
-    max-width: 100%;
-    width: max-content; /* Permite que la tabla tenga un ancho mínimo igual al contenido */
-    min-width: 100%; /* Asegura que la tabla tenga un ancho mínimo igual al contenedor */
 
+    caption{
+        caption-side: top;
+        text-align: left;
+    }
 
     th {
-
-        text-align: left;
-        padding: 0.75rem;
-        background-color: var(--c-gray-700);
         color: var(--c-text-primary);
+        text-align: left;
+        padding: 0.45rem;
     }
 
     td {
 
-        padding: 0.75rem;
+        border: 1px solid var(--c-gray-600);
+        background-color: var(--c-gray-700);
+        color: var(--c-text-primary);
+        padding: 5px;
+
 
     }
 
     tr {
         &:hover {
-            background-color: var(--c-gray-600);
+            background-color: var(--c-gray-700);
         }
     }
 
@@ -91,10 +112,7 @@
 
 }
 
-.table-container {
-    overflow-x: auto;
-    max-width: 100%; /* Asegura que el contenedor se ajuste al ancho del contenido */
-}
+
 
 .risk-container {
     display: flex;
@@ -102,8 +120,8 @@
 }
 
 .risk-image img {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     justify-content: center;
     transition: transform 0.3s ease;
 }
@@ -163,6 +181,8 @@
 }
 
 .botonesEditDeleteTabla {
+    max-width: 150px;
+    max-height: 50px;
     display: flex;
     justify-content: space-between;
 }
@@ -193,4 +213,16 @@
     background-color: #252525; /* Cambia el color de fondo a gris */
     color: #737373; /* Cambia el color del texto a gris claro */
     cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+}
+
+
+
+
+.service-section {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.service-section.active {
+    opacity: 1;
 }

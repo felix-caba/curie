@@ -62,6 +62,8 @@ a {
 
 
 
+
+
 .app-body {
 
     overflow: hidden;
@@ -127,6 +129,58 @@ a {
     flex-direction: column;
     line-height: 1.25;
 }
+
+
+.slide-fade-enter-active {
+    transition: opacity 1s ease;
+}
+
+.slide-fade-enter {
+    transition: opacity 1s ease;
+}
+
+.slide-fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.slide-fade-leave-to, .slide-fade-enter-from
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+.app-body-main-content{
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Ajusta según tu layout */
+    height: 100%; /* Ajusta según tu layout */
+
+}
+
+
+.app-header-logo{
+    margin-bottom: 0;
+}
+
+
+input,
+select,
+a,
+textarea,
+button {
+    &:focus {
+        outline: 0;
+
+    }
+}
+
+
+.body-tab{
+
+
+
+}
+
 .navigation {
     display: flex;
     flex-direction: column;
@@ -153,45 +207,15 @@ a {
 
         &:hover,
         &:focus {
+
             transform: translateX(4px);
+
+
         }
         &.active {
             font-weight: 600;
         }
 
-    }
-}
-
-.slide-fade-enter-active {
-    transition: opacity 0.5s ease;
-}
-
-.slide-fade-enter {
-    transition: opacity 0.5s ease;
-}
-
-.slide-fade-leave-active {
-    transition: opacity 0.5s ease;
-}
-
-.app-header-logo{
-    margin-bottom: 0;
-}
-
-.slide-fade-leave-to, .slide-fade-enter-from
-    /* .slide-fade-leave-active below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
-}
-
-input,
-select,
-a,
-textarea,
-button {
-    &:focus {
-        outline: 0;
-        box-shadow: 0 0 0 2px var(--c-gray-800), 0 0 0 4px var(--c-gray-300);
     }
 }
 

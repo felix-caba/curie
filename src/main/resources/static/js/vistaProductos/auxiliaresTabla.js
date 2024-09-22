@@ -12,66 +12,78 @@ const isAdmin = document.querySelector('meta[name="isAdmin"]').getAttribute('con
 
 let isSearchingAuxiliares = false;
 
-function loadDataAuxiliares(offsetA) {
+    function loadDataAuxiliares(offsetA) {
+        const searchQueryAuxiliar = document.getElementById('searchInputAuxiliares').value;
+        let urlAuxiliar = `/api/auxiliares/paginados?offsetA=${offsetA}&limitA=${limitA}`;
 
-    const searchQueryAuxiliar = document.getElementById('searchInputAuxiliares').value;
+        if (isSearchingAuxiliares && searchQueryAuxiliar) {
+            urlAuxiliar = `/api/auxiliares/search?query=${encodeURIComponent(searchQueryAuxiliar)}`;
+        }
 
-    let urlAuxiliar = `/api/auxiliares/paginados?offsetA=${offsetA}&limitA=${limitA}`;
+        const tableBody = document.getElementById('auxiliarTableBody');
 
-    if (isSearchingAuxiliares && searchQueryAuxiliar) {
-        urlAuxiliar = `/api/auxiliares/search?query=${encodeURIComponent(searchQueryAuxiliar)}`;
+        // No borres el contenido existente inmediatamente
+        // tableBody.innerHTML = '<tr><td colspan="8">Cargando...</td></tr>';
+
+        fetch(urlAuxiliar)
+            .then(response => response.json())
+            .then(data => {
+                const fragment = document.createDocumentFragment();
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td>${item.idProducto}</td>
+                    <td>${item.nombre}</td>
+                    <td>${item.cantidad}</td>
+                    <td>${item.stockMinimo}</td>
+                    <td>${item.formato}</td>
+                    <td>${item.nombreLocalizacion}</td>
+                    <td>${item.nombreUbicacion}</td>
+                `;
+
+                    if (isAdmin) {
+                        row.innerHTML += `
+                        <td>
+                            <div class="botonesEditDeleteTabla">
+                                <img class="botonAccionTabla" id="editButtonAuxiliar" src="/svg/edit.svg" alt="Editar" data-id="${item.idProducto}">
+                                <img class="botonAccionTabla" id="deleteButtonAuxiliar" src="/svg/delete.svg" alt="Borrar" data-id="${item.idProducto}">
+                            </div>
+                        </td>
+                    `;
+                    }
+
+                    fragment.appendChild(row);
+                });
+
+                // Usa setTimeout para retrasar la actualización del DOM
+                setTimeout(() => {
+                    tableBody.innerHTML = '';
+                    tableBody.appendChild(fragment);
+                    updatePaginationButtons(data.length);
+                }, 50);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                tableBody.innerHTML = '<tr><td colspan="8">Error al cargar los datos. Por favor, intente de nuevo.</td></tr>';
+            });
     }
 
+    function updatePaginationButtons(dataLength) {
+        const loadMoreButton = document.getElementById('loadMoreButtonAux');
+        const loadPreviousButton = document.getElementById('loadPreviousButtonAux');
+        const crearAuxiliarButton = document.getElementById('crearAuxiliarButton');
 
-    console.log('offsetA', offsetA);
-    fetch(urlAuxiliar)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('auxiliarTableBody');
-            tableBody.innerHTML = '';
-            data.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                  <td>${item.idProducto}</td>
-                  <td>${item.nombre}</td>
-                  <td>${item.cantidad}</td>
-                   <td>${item.stockMinimo}</td>
-                   <td>${item.formato}</td>
-                  <td>${item.nombreLocalizacion}</td>
-                   <td>${item.nombreUbicacion}</td>`;
-
-                   if (isAdmin) {
-                    row.innerHTML += `
-
-                  <td>
-                      <div class="botonesEditDeleteTabla">
-                          <button class="edit-button" id="editButtonAuxiliar" data-id="${item.idProducto}">Editar</button>
-                          <button class="delete-button" id="deleteButtonAuxiliar" data-id="${item.idProducto}">Borrar</button>
-                    </div>
-                  </td>`;
-
-
-
-                }
-
-                tableBody.appendChild(row);
-            });
-
-
-            if (isSearchingAuxiliares) {
-                document.getElementById('loadMoreButtonAux').style.pointerEvents = 'none';
-                document.getElementById('loadPreviousButtonAux').style.pointerEvents = 'none';
-                document.getElementById('crearAuxiliarButton').style.pointerEvents = 'none';
-            } else {
-                document.getElementById('loadMoreButtonAux').style.pointerEvents = data.length < limitA ? 'none' : 'auto';
-                document.getElementById('loadPreviousButtonAux').style.pointerEvents = offsetA === 0 ? 'none' : 'auto';
-                document.getElementById('crearAuxiliarButton').style.pointerEvents = 'auto';
-            }
-
-
-        })
-        .catch(error => console.error('Error:', error));
-}
+        if (isSearchingAuxiliares) {
+            loadMoreButton.style.pointerEvents = 'none';
+            loadPreviousButton.style.pointerEvents = 'none';
+            crearAuxiliarButton.style.pointerEvents = 'none';
+        } else {
+            loadMoreButton.style.pointerEvents = dataLength < limitA ? 'none' : 'auto';
+            loadPreviousButton.style.pointerEvents = offsetA === 0 ? 'none' : 'auto';
+            crearAuxiliarButton.style.pointerEvents = 'auto';
+        }
+    }
 
 function handleSearchAuxiliar() {
     offsetA = 0; // Reset the offset when searching
@@ -81,6 +93,7 @@ function handleSearchAuxiliar() {
 
 function loadPreviousData() {
     if (offsetA >= limitA) {
+
         offsetA -= limitA;
         loadDataAuxiliares(offsetA); // Recargar datos con el nuevo offsetA
     }
@@ -94,14 +107,21 @@ document.getElementById('searchInputAuxiliares').addEventListener('keypress', (e
 });
 
 document.getElementById('loadPreviousButtonAux').addEventListener('click', loadPreviousData);
+
+
+
+
 document.getElementById('loadMoreButtonAux').addEventListener('click', () => {
     offsetA += limitA;
     loadDataAuxiliares(offsetA);
 });
 
+
+
 document.getElementById('cancelSearchButtonAuxiliares').addEventListener('click', cancelSearchAuxiliar);
 
-document.getElementById('loadMoreButtonAux').addEventListener('click', loadDataAuxiliares);
+// XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+
 
 document.addEventListener('DOMContentLoaded', loadDataAuxiliares);
 
@@ -117,6 +137,8 @@ loadDataAuxiliares(offsetA);
 
 
 const modalAuxiliar = document.getElementById("editModalAuxiliar");
+
+
 
 const spanAuxiliar = document.getElementsByClassName("close Auxiliar")[0];
 
@@ -134,13 +156,17 @@ window.onclick = function(event) {
             }
         }
 
+
+
+
 document.getElementById('auxiliarTableBody').addEventListener('click', (event) => {
             if (event.target.id === 'editButtonAuxiliar') {
-                console.log('Editando auxiliar')
                 const id = event.target.getAttribute('data-id');
                 openEditModalAuxiliar(id);
             }
         });
+
+
 
 
 if (isAdmin) {

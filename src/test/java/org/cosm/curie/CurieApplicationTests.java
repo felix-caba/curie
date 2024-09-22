@@ -8,6 +8,9 @@ class CurieApplicationTests {
 
     @Test
     void contextLoads() {
+
+
+
     }
 
 }
