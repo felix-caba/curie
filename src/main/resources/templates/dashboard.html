@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="es">
 
 <head>
 
@@ -23,7 +23,7 @@
 
 
 
-    </script>
+
 
 
 
@@ -70,11 +70,6 @@
 
 
 
-
-
-
-
-
     </script>
 
     <title>Felix</title>
@@ -83,7 +78,9 @@
     <link th:href="@{/css/ReactivoModalCSS.css}" rel="stylesheet">
     <link th:href="@{/css/impresionCSS.css}" rel="stylesheet">
     <link th:href="@{/css/vistaTablas.css}" rel="stylesheet">
+    <link th:href="@{/css/creditos.css}" rel="stylesheet">
     <link th:href="@{/css/globales/elementosGlobales.css}" rel="stylesheet">
+    <link th:href="@{/css/miCuenta.css}" rel="stylesheet">
 
     <meta name="countProductos" th:content="${countProductos}">
     <meta name="countReactivos" th:content="${countReactivos}">
@@ -106,9 +103,12 @@
 
         <div class="headerFlex titulo">
                 <h1 class="logo-title">
-                    <span>Curie</span>
-                    <span>v1.0</span>
-                    <span id="username" th:text="${nombreUsuario}"></span>
+                    <span>CurieXD</span>
+                    <span sec:authorize="hasAuthority('ROLE_ADMIN')">v1.0</span>
+                    <span id="username" th:text="${#authentication.name}" ></span>
+                    <span id="isAdmin?" sec:authorize="hasAuthority('ROLE_ADMIN')" > Admin</span>
+
+
                 </h1>
             </div>
 
@@ -170,21 +170,22 @@
                 <a href="#" class="body-tab" :class="{ active: currentView === 'general' }" @click="changeView('general')">
                     <span>General</span>
                 </a>
-
                 <a href="#" class="body-tab" :class="{ active: currentView === 'producto' }" @click="changeView('producto')">
                     <span>Productos</span>
                 </a>
-
                 <a href="#" class="body-tab" :class="{ active: currentView === 'impresion' }" @click="changeView('impresion')">
                     <span>Impresión</span>
                 </a>
                 <a href="#" class="body-tab" :class="{ active: currentView === 'miCuenta' }" @click="changeView('miCuenta')">
-                    <span>Mi Cuenta</span>
+                <span>Mi Cuenta</span>
                 </a>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="body-tab" >
+                <a href="#" class="body-tab" :class="{ active: currentView === 'creditos' }" @click="changeView('creditos')">
+                <span>Creditos</span>
+                </a>
+                <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="#" class="body-tab" >
                     <span>Control de Lugares</span>
                 </a>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="body-tab" :class="{ active: currentView === 'controlCuentas' }" @click="changeView('controlCuentas')">
+                <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="#" class="body-tab" :class="{ active: currentView === 'controlCuentas' }" @click="changeView('controlCuentas')">
                     <span>Control de Cuentas</span>
                 </a>
 

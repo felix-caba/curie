@@ -11,6 +11,10 @@ body {
     justify-content: center;
 }
 
+#isAdmin\?{
+    color: #FF4B2B;
+    font-size: 14px;
+}
 
 button,
 select,

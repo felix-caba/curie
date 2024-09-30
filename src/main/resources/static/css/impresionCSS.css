@@ -12,13 +12,12 @@
     border-bottom: 1px solid #313131; /* Borde solo en la parte inferior */
     padding: 10px; /* Espacio interno */
     margin-bottom: 20px; /* Espacio entre los grupos de botones */
-    width: 100%; /* Ancho del contenedor */
 }
 
 
 #fechaCaducidadInput {
 
-    background-color: #484d48;
+    background-color: var(--c-gray-800);
     color: white;
     border: none;
     border-radius: 5px;
@@ -28,9 +27,18 @@
 #cantidadInput {
 
 
-    background-color: #484d48;
+    background-color: var(--c-gray-800);
     color: white;
     border: none;
     border-radius: 5px;
 
+}
+
+.auxiliarDeCantidad{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
 }

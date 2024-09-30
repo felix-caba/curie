@@ -23,6 +23,11 @@
     fill: currentColor; /* Aplica el color actual */
 }
 
+
+
+
+
+
 body {
     background-color: var(--c-gray-900);
     color: var(--c-text-primary);
@@ -78,4 +83,9 @@ body {
     --c-text-primary: var(--c-gray-100);
     --c-text-secondary: var(--c-gray-200);
     --c-text-tertiary: var(--c-gray-500);
+
+    .botonAccionTabla{
+        filter: invert(100%);
+    }
+
 }

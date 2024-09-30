@@ -30,7 +30,9 @@ dependencies {
 
     runtimeOnly("org.webjars.npm:jspdf:2.5.1")
     runtimeOnly("org.webjars.npm:jspdf-autotable:3.5.20")
-
+// https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
+    compileOnly("org.springframework.boot:spring-boot-devtools")
 
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     implementation 'org.projectlombok:lombok:1.18.30'
@@ -38,12 +40,19 @@ dependencies {
     runtimeOnly("org.webjars.npm:vue:3.5.6")
 
 
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+
+// https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
+    implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
+
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'mysql:mysql-connector-java:8.0.28'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

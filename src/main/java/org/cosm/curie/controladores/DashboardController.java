@@ -7,6 +7,7 @@ import org.cosm.curie.entidades.Usuario;
 import org.cosm.curie.repositorios.*;
 import org.cosm.curie.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ public class DashboardController {
 
 
 
+
+
     @GetMapping("/")
     public String dashboard(Model model, Authentication authentication, HttpServletRequest request) {
 
@@ -47,23 +50,18 @@ public class DashboardController {
         model.addAttribute("countMateriales", countMateriales);
         model.addAttribute("countProductos", countProductos);
 
-        boolean isAdmin = authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
-
         UsuarioDTO usuarioDTO = UsuarioControlador.getCurrentUser();
 
 
         int id = 0;
-
-
 
         if (usuarioDTO != null) {
             id = usuarioDTO.getId();
             model.addAttribute("nombreUsuario", usuarioDTO.getUsername());
         }
 
-
-
+        boolean isAdmin = authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        model.addAttribute("isAdmin", isAdmin);
 
         passwordResetTokenRepository.deleteById(id);
 

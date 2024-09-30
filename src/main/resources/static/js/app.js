@@ -3,6 +3,7 @@ import ProductoComponent from "./components/productoComponent.js";
 import impresionComponent from "./components/impresionComponent.js";
 import miCuentaComponent from "./components/miCuentaComponent.js";
 import controlCuentasComponent from "./components/controlCuentasComponent.js";
+import creditosComponent from "./components/creditosComponent.js";
 
 const { createApp } = Vue
 
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'impresion': impresionComponent,
             'miCuenta': miCuentaComponent,
             'controlCuentas': controlCuentasComponent,
+            'creditos': creditosComponent,
         },
         methods: {
 

@@ -1,40 +1,32 @@
-<section id="lugares-link" class="service-sectionFather">
+<section class="service-sectionFather">
 
-  <h1>Configuración Lugares</h1>
+  <h1>Bienvenido a los Creditos de Curie App, realizada por COSM</h1>
 
-  <div class="search-containerUbicaciones">
-    <input type="text" id="searchInputUbicaciones" placeholder="Buscar...">
-    <button id="searchButtonUbicaciones">Buscar</button>
-    <button id="cancelSearchButtonUbicaciones">Cancelar</button>
+  <div class="creditos">
+
+    <div class="creditosNombres">Félix Caba Martín</div>
+    <a>Desarrollador, Dictador del Proyecto</a>
+
+    <div class="creditosNombres">Alejandro Hortal Valor</div>
+    <div class="creditosNombres">Jesús Algo Algo</div>
+    <div class="creditosNombres">Manuel Zambudio</div>
+    <a>Apoyo Emocional</a>
+
+    <div class="creditosNombres">Manuel Cervantes Vico</div>
+    <a>Seguridad de la Aplicación, Testeo de vulnerabilidades</a>
+
+    <div class="creditosNombres">Ruth María Galera Mendoza</div>
+    <a>La profesora más guapa del Zaidín Vergeles</a>
+
+    <div class="creditosNombres">Cafeína</div>
+    <a>Por mantenerme despierto hasta las 6 AM</a>
+
+
+
   </div>
 
-  <div class="table-container">
-    <table border="1">
-      <thead>
-      <tr>
-        <th>ID Producto</th>
-
-        <th>Nombre Ubicacion</th>
-
-        <th>Nombre Localizacion</th>
-
-        <th th:if="${isAdmin}">Acciones</th>
-
-      </tr>
-      </thead>
-      <tbody id="ubicacionTableBody"></tbody>
-    </table>
-  </div>
-
-  <br>
 
 
-  <div class="botonesAccionesTabla">
-    <button class="butonAccionTabla" id="loadMoreButtonUbicacion">Adelante </button>
-    <button class="butonAccionTabla Crea" th:if="${isAdmin}" id="crearUbicacionButton">Crear Ubicacion</button>
-    <button class="butonAccionTabla" id="loadPreviousButtonUbicacion">Atrás</button>
-  </div>
 
-  <script th:src="@{/js/dashBoardUbicacionTabla.js}"></script>
 
 </section>

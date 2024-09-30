@@ -12,7 +12,7 @@ export default {
 
     <div class="impresionesBotones">
 
-      <h2 id="impresionTituloTodos">Imprimir Total</h2>
+      <h2 id="impresionTituloTodos">Imprimir Total (Inventario Total)</h2>
 
       <div class="impresionTotal">
         <button id="imprimirReactivoTodos">Imprimir Reactivos</button>
@@ -20,10 +20,8 @@ export default {
         <button id="imprimirMaterialTodos">Imprimir Materiales</button>
       </div>
 
-      <h2 id="impresionTituloCantidad">Imprimir por Cantidad</h2>
-
+      <h2 id="impresionTituloCantidad">Imprimir por Cantidad (Cantidad menor que)</h2>
       <div class="auxiliarDeCantidad">
-        <label for="cantidadInput">Introduce una cantidad desde la que quieres realizar la impresión</label>
         <input type="number" id="cantidadInput" placeholder="Cantidad">
       </div>
 
@@ -33,11 +31,9 @@ export default {
         <button id="imprimirMaterialCantidad">Imprimir Materiales</button>
       </div>
 
-      <h2 id="impresionTituloCaducidad">Imprimir por Fecha</h2>
+      <h2 id="impresionTituloCaducidad">Imprimir por Fecha (Antes de)</h2>
 
       <div class="impresionPorFechaDeCaducidad">
-
-        <label for="fechaCaducidadInput">Introduce desde la fecha que quieres realizar la impresión</label>
         <input type="date" id="fechaCaducidadInput">
         <button id="imprimirReactivoCaducidad">Imprimir Reactivo</button>
 

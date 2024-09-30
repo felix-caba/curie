@@ -2,6 +2,7 @@ package org.cosm.curie.validacion;
 
 import org.cosm.curie.entidades.Usuario;
 import org.cosm.curie.repositorios.UsuarioRepositorio;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,14 +22,25 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
+    @Profile("!dev")
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         if (usuario.getAdmin() == 1) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
+
+
+
         return authorities;
     }
+
+
+
+
+
+
 
     @Override
     public String getPassword() {

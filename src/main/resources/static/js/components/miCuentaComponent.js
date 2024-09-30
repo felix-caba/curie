@@ -10,7 +10,7 @@ export default {
     <section class="service-sectionFather"> 
     
     
-    <h1>Mi Cuenta</h1>
+    <h1 class="tituloNombres">Mi Cuenta</h1>
     
     <form id="userForm">
             <label for="username">Nombre del usuario:</label>
