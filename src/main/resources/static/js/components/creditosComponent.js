@@ -15,7 +15,7 @@ export default {
     
     
     <div class="creditosNombres">Alejandro Hortal Valor</div>
-    <div class="creditosNombres">Jesús Algo Algo</div>
+    <div class="creditosNombres">Jesús Rodriguez Sanchéz</div>
     <div class="creditosNombres">Manuel Zambudio
     <a>Apoyo Emocional</a>
     </div>

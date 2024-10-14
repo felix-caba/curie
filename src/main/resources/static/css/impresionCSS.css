@@ -18,7 +18,7 @@
 #fechaCaducidadInput {
 
     background-color: var(--c-gray-800);
-    color: white;
+    color: var(--c-gray-200);
     border: none;
     border-radius: 5px;
 

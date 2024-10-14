@@ -21,7 +21,7 @@
 
 .service-sectionFather label {
     margin-bottom: 0.5rem;
-    color: #606770;
+    color: var(--c-gray-300);
 }
 
 .service-sectionFather input[type="text"],
@@ -47,7 +47,7 @@ input[type="file"] {
 
 #saveButton {
     background-color: var(--c-gray-800);
-    color: white;
+    color: var(--c-gray-200);
     border: none;
     padding: 0.75rem;
     border-radius: 4px;

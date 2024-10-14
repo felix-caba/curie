@@ -88,9 +88,15 @@
     margin-right: 50px;
 }
 
+
+
 #editRiesgos {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 240px;
+    justify-content: center;
 }
 
 
